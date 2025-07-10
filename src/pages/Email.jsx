@@ -1,29 +1,48 @@
-import {React , useState} from 'react'
+import React, { useState } from 'react';
 import CompleteApplicationModal from './EmailFormModal';
+import '../app.css';
 
 const Email = () => {
-    const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState('');
+  const [showModal, setShowModal] = useState(false);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setShowModal(true);
-        console.log("Form submitted");
-        
-    }
-    
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", email);
+    setShowModal(true);
+  };
+
   return (
-    <div>
-        <form onSubmit={handleSubmit} className="main-form">
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required/>
-            <br />
-            <button type="submit">submit</button>
+    <div className="email-page">
+      <div className="email-box">
+        <h2 className="email-title">ENTER EMAIL TO CONTINUE</h2>
+        <p className="email-subtext">
+          We'll verify your email and continue to the hiring form.
+        </p>
+        <form onSubmit={handleSubmit} className="email-form">
+          <label htmlFor="email">
+            Email Address <span className="required-star">*</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="e.g. example@mail.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <button type="submit" className="email-btn">
+            CONTINUE
+          </button>
         </form>
-            {showModal && (
-                <CompleteApplicationModal onClose={() => setShowModal(false)} />
-            )}
+      </div>
+
+      {showModal && (
+        <CompleteApplicationModal onClose={() => setShowModal(false)} />
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default Email;
