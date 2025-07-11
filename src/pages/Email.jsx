@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import CompleteApplicationModal from './EmailFormModal';
-import '../app.css';
+import '../App.css';
 
 const Email = () => {
   const [email, setEmail] = useState('');
